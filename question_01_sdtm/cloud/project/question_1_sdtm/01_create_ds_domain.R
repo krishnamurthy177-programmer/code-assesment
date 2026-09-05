@@ -3,8 +3,6 @@
 #conversion raw dataset to SDTM.DS
 #program name: 01_create_ds_domain.R
 
-
-
 dir.create("logs", showWarnings = FALSE)
 
 log_file <- "logs/DS_program.log"
@@ -15,18 +13,25 @@ cat("DS program started\n")
 
 #install packages
 install.packages(c("admiral", "sdtm.oak", "gt", "ggplot2"))
+install.packages("dplyr")
+install.packages("tidyverse")
+install.packages("sdtm.oak")
+install.packages("pharmaversesdtm")
+install.packages("haven")
+install.packages("pharmaverseraw")
+install.packages("arrow")
+
+library(haven)
+library(sdtm.oak)
+library(dplyr)
+library(tidyverse)
+library(arrow)
 
 #input dataset
-install.packages("pharmaverseraw")
 
 pharmaverseraw::ds_raw
 
 ds_raw <- pharmaverseraw::ds_raw
-
-install.packages("dplyr")
-install.packages("tidyverse")
-library(dplyr)
-library(tidyverse)
 
 study_ct <-
   data.frame(
@@ -55,10 +60,6 @@ study_ct <-
                       "Discontinued Participation")
   ) 
 
-
-
-install.packages("sdtm.oak")
-library(sdtm.oak)
 
 ds_raw <- ds_raw %>%
   mutate(
@@ -129,8 +130,7 @@ ds <- ds %>%
   )
 
 # Map qualifier DSSTDY
-install.packages("pharmaversesdtm")
-pharmaversesdtm::dm
+
 
 dm<-pharmaversesdtm::dm
 
@@ -154,8 +154,7 @@ ds <- ds %>% mutate(id=str_sub(ds_raw$STUDY, -2, -1))%>%
 
 
 #ATTRIBUTES
-install.packages("haven")
-library(haven)
+
 
 attr(ds$STUDYID, "label") <- "Study Identifier"
 attr(ds$DOMAIN,  "label") <- "Domain Abbreviation"
@@ -175,6 +174,7 @@ DS <- ds %>%
     DSSTDTC, DSSTDY
   )
 
+write_parquet(DS, "DS.parquet")
 # as per SDTMIG there will be no VISIT,VISTNUM 
 
 cat("DS program completed\n")
