@@ -12,7 +12,7 @@ question_03_tlg folder contain seven files as
 01_create_ae_summary_table.R ,
 02_create_visualizations.R,
 01_create_ae_summary_table.log,
-01_create_visualizations.log,
+02_create_visualizations.log,
 AE_Table_summary.html,
 AE_Severity_distribution.png,
 Top10_AEs.png
