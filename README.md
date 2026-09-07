@@ -4,7 +4,7 @@ question_01_sdtm folder contain three files
 01_create_ds_domain.R,
 ds_program.log,
 DS.parquet 
-question_02_adam_ folder contain three files
+question_02_adam folder contain three files
 create_adsl.R,
 ADSL_program.log,
 adsl.parquet
