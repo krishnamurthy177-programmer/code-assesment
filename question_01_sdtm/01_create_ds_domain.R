@@ -90,16 +90,7 @@ ds <- ds %>%
     ct_clst = "C66727",
     id_vars = oak_id_vars()
   )
-ds <- ds %>%
-  # Map qualifier DSDECOD
-  assign_ct(
-    raw_dat = ds_raw,
-    raw_var = "IT.DSDECOD",
-    tgt_var = "DSDECOD",
-    ct_spec = study_ct,
-    ct_clst = "C66727",
-    id_vars = oak_id_vars()
-  )
+
 # Map qualifier DSCAT
 ds <- ds %>% 
   mutate(
